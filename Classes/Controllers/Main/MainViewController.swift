@@ -69,7 +69,7 @@ extension MainViewController: UITabBarControllerDelegate {
         if previousController == viewController {
             if let navVC = viewController as? BaseNavigationController, let vc = navVC.viewControllers.first as? QuotesTableViewController {
                 if vc.isViewLoaded && vc.view.window != nil {
-                    vc.tableView.setContentOffset(CGPoint.zero, animated: true)
+                    vc.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
                 }
             }
         }

@@ -37,6 +37,12 @@ class CategoriesTableViewController: BaseTableViewController {
         tableView.register(CategoryTableViewCell.classForCoder(), forCellReuseIdentifier: CategoryTableViewCellReuseIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
+        var insets = contentInset
+        insets?.bottom = defaultBottomInset()
+        
+        contentInset = insets
+        scrollIndicatorInsets = insets
+        
         loadData(withRefresh: true)
     }
     
