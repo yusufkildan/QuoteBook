@@ -11,19 +11,19 @@ import PureLayout
 
 let QuotesTableViewCellReuseIdentifier = NSStringFromClass(QuotesTableViewCell.classForCoder())
 
-private let AvatarViewDimension: CGFloat = 50
-private let DefaultInset: CGFloat = 8.0
-private let CategoryLabelFont = UIFont.latoSemiboldFont(withSize: 14.0)
-private let CategoryLabelDefaultHeight: CGFloat = 18.0
+fileprivate let AvatarViewDimension: CGFloat = 50
+fileprivate let DefaultInset: CGFloat = 8.0
+fileprivate let CategoryLabelFont = UIFont.latoSemiboldFont(withSize: 14.0)
+fileprivate let CategoryLabelDefaultHeight: CGFloat = 18.0
 
 class QuotesTableViewCell: UITableViewCell {
     
-    private var categoryLabel: UILabel!
-    private var categoryLabelWidthConstraint: NSLayoutConstraint!
+    fileprivate var categoryLabel: UILabel!
+    fileprivate var categoryLabelWidthConstraint: NSLayoutConstraint!
     
-    private var avatarView: UIImageView!
-    private var quoteLabel: UILabel!
-    private var authorLabel: UILabel!
+    fileprivate var avatarView: UIImageView!
+    fileprivate var quoteLabel: UILabel!
+    fileprivate var authorLabel: UILabel!
     
     var category: String! {
         didSet {
@@ -67,7 +67,7 @@ class QuotesTableViewCell: UITableViewCell {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         categoryLabel = UILabel.newAutoLayout()
         categoryLabel.font = CategoryLabelFont
         categoryLabel.layer.backgroundColor = UIColor.secondaryBackgroundColor().cgColor

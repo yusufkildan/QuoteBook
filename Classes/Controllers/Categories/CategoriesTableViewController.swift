@@ -11,7 +11,7 @@ import PureLayout
 
 class CategoriesTableViewController: BaseTableViewController {
     
-    private var categories: [Category]! = []
+    fileprivate var categories: [Category]! = []
     
     // MARK: Constructors
     
@@ -25,7 +25,7 @@ class CategoriesTableViewController: BaseTableViewController {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         title = "Categories"
     }
     
@@ -70,7 +70,7 @@ class CategoriesTableViewController: BaseTableViewController {
     
     // MARK: - Configure
     
-    private func configure(CategoryTableViewCell cell: CategoryTableViewCell, withIndexPath indexPath: IndexPath) {
+    fileprivate func configure(CategoryTableViewCell cell: CategoryTableViewCell, withIndexPath indexPath: IndexPath) {
         if indexPath.row >= categories.count {
             return
         }
@@ -89,8 +89,11 @@ class CategoriesTableViewController: BaseTableViewController {
             cell.count = count
         }
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+
+extension CategoriesTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
@@ -105,8 +108,11 @@ class CategoriesTableViewController: BaseTableViewController {
             navigationController?.pushViewController(controller, animated: true)
         }
     }
-    
-    // MARK: - UITableViewDataSource
+}
+
+// MARK: - UITableViewDataSource
+
+extension CategoriesTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

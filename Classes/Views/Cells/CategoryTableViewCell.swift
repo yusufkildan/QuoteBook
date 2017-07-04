@@ -11,15 +11,15 @@ import PureLayout
 
 let CategoryTableViewCellReuseIdentifier = NSStringFromClass(CategoryTableViewCell.classForCoder())
 
-private let CategoryImageViewDimension: CGFloat = 50.0
-private let DefaultInset: CGFloat = 8.0
+fileprivate let CategoryImageViewDimension: CGFloat = 50.0
+fileprivate let DefaultInset: CGFloat = 8.0
 
 class CategoryTableViewCell: UITableViewCell {
     
-    private var categoryImageView: UIImageView!
-    private var titleLabel: UILabel!
+    fileprivate var categoryImageView: UIImageView!
+    fileprivate var titleLabel: UILabel!
     
-    private var badgeLabel: BadgeView!
+    fileprivate var badgeLabel: BadgeView!
     
     var categoryImage: UIImage! {
         didSet {
@@ -51,7 +51,7 @@ class CategoryTableViewCell: UITableViewCell {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         categoryImageView = UIImageView.newAutoLayout()
         categoryImageView.contentMode = UIViewContentMode.scaleAspectFill
         categoryImageView.layer.cornerRadius = CategoryImageViewDimension / 2

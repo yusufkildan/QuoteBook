@@ -11,9 +11,9 @@ import PureLayout
 
 class FavoritesTableViewController: BaseTableViewController {
     
-    private var quotes: [Quote]! = []
+    fileprivate var quotes: [Quote]! = []
     
-    private var emptyStateView: EmptyStateView!
+    fileprivate var emptyStateView: EmptyStateView!
     
     // MARK: Constructors
     
@@ -27,7 +27,7 @@ class FavoritesTableViewController: BaseTableViewController {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         title = "My Favorites"
     }
     
@@ -38,6 +38,7 @@ class FavoritesTableViewController: BaseTableViewController {
         
         tableView.register(QuotesTableViewCell.classForCoder(), forCellReuseIdentifier: QuotesTableViewCellReuseIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
         
         emptyStateView = EmptyStateView.newAutoLayout()
         emptyStateView.isHidden = true
@@ -80,7 +81,7 @@ class FavoritesTableViewController: BaseTableViewController {
     
     // MARK: - Configure
     
-    private func configure(QuotesTableViewCell cell: QuotesTableViewCell, withIndexPath indexPath: IndexPath) {
+    fileprivate func configure(QuotesTableViewCell cell: QuotesTableViewCell, withIndexPath indexPath: IndexPath) {
         if indexPath.row >= quotes.count {
             return
         }
@@ -100,8 +101,11 @@ class FavoritesTableViewController: BaseTableViewController {
             cell.quote = quote
         }
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+
+extension FavoritesTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -115,8 +119,11 @@ class FavoritesTableViewController: BaseTableViewController {
         
         navigationController?.pushViewController(controller, animated: true)
     }
-    
-    // MARK: - UITableViewDataSource
+}
+
+// MARK: - UITableViewDataSource
+
+extension FavoritesTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

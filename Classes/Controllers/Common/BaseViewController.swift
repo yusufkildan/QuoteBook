@@ -21,7 +21,7 @@ enum ControllerState {
 }
 
 class BaseViewController: UIViewController {
-    private let instanceIdentifier = NSUUID.init().uuidString
+    fileprivate let instanceIdentifier = NSUUID.init().uuidString
     
     lazy var customBackButton: UIButton! = {
         [unowned self] in
@@ -33,18 +33,6 @@ class BaseViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: UIControlEvents.touchUpInside)
         
         return backButton
-        }()
-    
-    lazy var customCrossButton: UIButton! = {
-        [unowned self] in
-        let crossButton = UIButton(type: UIButtonType.custom)
-        crossButton.frame = CGRect(x: 0.0, y: 0.0, width: 44.0, height: 44.0)
-        crossButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        crossButton.setImage(UIImage(named: ""), for: UIControlState.normal)
-        crossButton.adjustsImageWhenHighlighted = false
-        crossButton.addTarget(self, action: #selector(crossButtonTapped(_:)), for: UIControlEvents.touchUpInside)
-        
-        return crossButton
         }()
     
     // MARK: - Constructors
@@ -61,7 +49,7 @@ class BaseViewController: UIViewController {
         self.commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         let dnc = NotificationCenter.default
         
         dnc.addObserver(self, selector: #selector(BaseViewController.didReceiveKeyboardWillShowNotification(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -262,10 +250,6 @@ class BaseViewController: UIViewController {
     
     func backButtonTapped(_ button: UIButton) {
         
-    }
-    
-    func crossButtonTapped(_ button: UIButton) {
-        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Identifier

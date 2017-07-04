@@ -10,22 +10,22 @@ import UIKit
 import PureLayout
 import Social
 
-private let DefaultInset: CGFloat = 8.0
-private let AvatarViewDimension: CGFloat = 80
-private let QuoteLabelFont = UIFont.latoRegularFont(withSize: 14.0)
+fileprivate let DefaultInset: CGFloat = 8.0
+fileprivate let AvatarViewDimension: CGFloat = 80
+fileprivate let QuoteLabelFont = UIFont.latoRegularFont(withSize: 14.0)
 
 class QuoteDetailViewController: BaseViewController {
     
-    private var quote: Quote?
+    fileprivate var quote: Quote?
     
-    private var avatarView: UIImageView!
+    fileprivate var avatarView: UIImageView!
     
-    private var quoteLabel: UILabel!
-    private var quoteLabelHeightConstraint: NSLayoutConstraint!
+    fileprivate var quoteLabel: UILabel!
+    fileprivate var quoteLabelHeightConstraint: NSLayoutConstraint!
     
-    private var authorLabel: UILabel!
+    fileprivate var authorLabel: UILabel!
     
-    private var favoriteButton: UIButton!
+    fileprivate var favoriteButton: UIButton!
     
     // MARK: - Constructors
     
@@ -47,7 +47,7 @@ class QuoteDetailViewController: BaseViewController {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         title = "Quote"
         
         favoriteButton = UIButton(type: UIButtonType.custom)
@@ -117,7 +117,7 @@ class QuoteDetailViewController: BaseViewController {
     
     // MARK: - Update
     
-    func updateInterface() {
+    fileprivate func updateInterface() {
         guard let quote = quote else {
             return
         }
@@ -174,7 +174,7 @@ class QuoteDetailViewController: BaseViewController {
         updateInterface()
     }
     
-    func shareButtonTapped(_ button: UIButton) {
+    @objc func shareButtonTapped(_ button: UIButton) {
         guard let quote = quote else {
             return
         }

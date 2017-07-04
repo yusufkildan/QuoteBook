@@ -9,13 +9,15 @@
 import UIKit
 import PureLayout
 
+let TotalNumberOfQuotes = 1030
+
 class QuotesTableViewController: BaseTableViewController {
     
-    private var quotes: [Quote]! = []
-    private var lastQuoteIndex: Int! = 0
+    fileprivate var quotes: [Quote]! = []
+    fileprivate var lastQuoteIndex: Int! = 0
     
-    private var category: String?
-    private var author: String?
+    fileprivate var category: String?
+    fileprivate var author: String?
     
     // MARK: Constructors
     
@@ -32,6 +34,7 @@ class QuotesTableViewController: BaseTableViewController {
     init(withCategory category: String) {
         super.init()
         self.category = category
+        self.title = category
         
         commonInit()
     }
@@ -39,17 +42,14 @@ class QuotesTableViewController: BaseTableViewController {
     init(withAuthor author: String) {
         super.init()
         self.author = author
+        self.title = author
         
         commonInit()
     }
     
-    private func commonInit() {
-        
+    fileprivate func commonInit() {
         if category != nil || author != nil {
-            title = "Quotes"
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: customBackButton)
-        }else {
-            title = "All Quotes"
         }
     }
     
@@ -96,15 +96,15 @@ class QuotesTableViewController: BaseTableViewController {
             self.endRefreshing()
         }
         
-        if category != nil {
-            DatabaseManager.shared.getQuotesByCategory(category: category!, completion: { (quotes) in
+        if let category = category {
+            DatabaseManager.shared.getQuotesByCategory(category: category, completion: { (quotes) in
                 self.quotes = quotes
                 
                 self.tableView.reloadData()
                 self.finishLoading(withState: ControllerState.none, andMessage: nil)
             })
-        } else if author != nil {
-            DatabaseManager.shared.getQuotesByAuthor(author: author!, completion: { (quotes) in
+        } else if let author = author {
+            DatabaseManager.shared.getQuotesByAuthor(author: author, completion: { (quotes) in
                 self.quotes = quotes
                 
                 self.tableView.reloadData()
@@ -112,7 +112,7 @@ class QuotesTableViewController: BaseTableViewController {
             })
         } else {
             DatabaseManager.shared.getAllQuotes(lastQuoteIndex: lastQuoteIndex, completion: { (quotes) in
-                self.canLoadMore = self.lastQuoteIndex < 1030
+                self.canLoadMore = self.lastQuoteIndex < TotalNumberOfQuotes
                 
                 self.quotes = self.quotes + quotes
                 self.lastQuoteIndex = quotes.last?.id
@@ -121,13 +121,13 @@ class QuotesTableViewController: BaseTableViewController {
                 self.finishLoading(withState: ControllerState.none, andMessage: nil)
             })
         }
-
+        
         return true
     }
     
     // MARK: - Configure
     
-    private func configure(QuotesTableViewCell cell: QuotesTableViewCell, withIndexPath indexPath: IndexPath) {
+    fileprivate func configure(QuotesTableViewCell cell: QuotesTableViewCell, withIndexPath indexPath: IndexPath) {
         if indexPath.row >= quotes.count {
             return
         }
@@ -148,7 +148,16 @@ class QuotesTableViewController: BaseTableViewController {
         }
     }
     
-    // MARK: - UITableViewDelegate
+    // MARK: - Actions
+    
+    override func backButtonTapped(_ button: UIButton) {
+        _ = navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension QuotesTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -162,8 +171,11 @@ class QuotesTableViewController: BaseTableViewController {
         
         navigationController?.pushViewController(controller, animated: true)
     }
-    
-    // MARK: - UITableViewDataSource
+}
+
+// MARK: - UITableViewDataSource
+
+extension QuotesTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -183,11 +195,5 @@ class QuotesTableViewController: BaseTableViewController {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return QuotesTableViewCell.cellHeight()
-    }
-
-    // MARK: - Actions
-    
-    override func backButtonTapped(_ button: UIButton) {
-        _ = navigationController?.popViewController(animated: true)
     }
 }

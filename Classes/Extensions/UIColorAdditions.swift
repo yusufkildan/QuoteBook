@@ -10,6 +10,9 @@ import UIKit
 
 extension UIColor {
     
+    fileprivate class func greenColor() -> UIColor {
+        return UIColor(red: 104/255.0, green: 155/255.0, blue: 1/255.0, alpha: 1.0)
+    }
     // MARK: - Background
     
     public class func primaryBackgroundColor() -> UIColor {
@@ -17,7 +20,7 @@ extension UIColor {
     }
     
     public class func secondaryBackgroundColor() -> UIColor {
-        return UIColor(red: 104/255.0, green: 155/255.0, blue: 1/255.0, alpha: 1.0)
+        return greenColor()
     }
     
     // MARK: - Navigation
@@ -41,6 +44,6 @@ extension UIColor {
     // MARK: - Tab Bar
     
     public class func tabBarTintColor() -> UIColor {
-        return UIColor(red: 104/255.0, green: 155/255.0, blue: 1/255.0, alpha: 1.0)
+        return greenColor()
     }
 }

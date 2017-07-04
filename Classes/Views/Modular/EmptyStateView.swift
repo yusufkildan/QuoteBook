@@ -187,6 +187,8 @@ class EmptyStateView: UIView {
     }
 }
 
+// MARK: - EmptyStateViewDelegate
+
 protocol EmptyStateViewDelegate: NSObjectProtocol {
     func emptyStateViewDidTapButton(_ view: EmptyStateView)
 }

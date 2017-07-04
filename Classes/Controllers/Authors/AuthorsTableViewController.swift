@@ -14,7 +14,7 @@ class AuthorsTableViewController: BaseTableViewController {
     fileprivate var authors: [Author]! = []
     fileprivate var filteredAuthors: [Author]! = []
     
-    private var searchBar: CustomSearchBar!
+    fileprivate var searchBar: CustomSearchBar!
     fileprivate var isSearching: Bool! = false
     fileprivate var searchText: String! = ""
     
@@ -30,7 +30,7 @@ class AuthorsTableViewController: BaseTableViewController {
         commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         title = "Authors"
     }
     
@@ -42,6 +42,7 @@ class AuthorsTableViewController: BaseTableViewController {
         tableView.register(CategoryTableViewCell.classForCoder(), forCellReuseIdentifier: CategoryTableViewCellReuseIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorInset.left = 66.0
+        
         
         searchBar = CustomSearchBar.newAutoLayout()
         searchBar.shouldShowShadowOnBottom = true
@@ -55,6 +56,7 @@ class AuthorsTableViewController: BaseTableViewController {
         searchBar.autoPinEdge(toSuperviewEdge: ALEdge.left)
         searchBar.autoPinEdge(toSuperviewEdge: ALEdge.right)
         searchBar.autoSetDimension(ALDimension.height, toSize: CustomSearchBarDefaultHeight)
+        
         
         var insets = tableView.contentInset
         insets.top = defaultTopInset()
@@ -90,7 +92,7 @@ class AuthorsTableViewController: BaseTableViewController {
     
     // MARK: - Configure
     
-    private func configure(CategoryTableViewCell cell: CategoryTableViewCell, withIndexPath indexPath: IndexPath) {
+    fileprivate func configure(CategoryTableViewCell cell: CategoryTableViewCell, withIndexPath indexPath: IndexPath) {
         if indexPath.row >= authors.count {
             return
         }
@@ -115,8 +117,11 @@ class AuthorsTableViewController: BaseTableViewController {
             cell.count = count
         }
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+
+extension AuthorsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
@@ -139,8 +144,11 @@ class AuthorsTableViewController: BaseTableViewController {
             navigationController?.pushViewController(controller, animated: true)
         }
     }
-    
-    // MARK: - UITableViewDataSource
+}
+
+// MARK: - UITableViewDataSource
+
+extension AuthorsTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -167,11 +175,12 @@ class AuthorsTableViewController: BaseTableViewController {
     }
 }
 
-// MARK: - 
+// MARK: - CustomSearchBarDelegate
 
 extension AuthorsTableViewController: CustomSearchBarDelegate {
     func customSearchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearching = false
+        searchBar.resignFirstResponder()
         self.tableView.reloadData()
     }
     
