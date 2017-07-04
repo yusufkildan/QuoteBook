@@ -78,6 +78,10 @@ class QuotesTableViewController: BaseTableViewController {
         return true
     }
     
+    override func shouldShowLogoAsTitleView() -> Bool {
+        return !(category != nil || author != nil)
+    }
+    
     // MARK: - Load Data
     
     @discardableResult override func loadData(withRefresh refresh: Bool) -> Bool {

@@ -254,6 +254,8 @@ class BaseViewController: UIViewController {
             
             scrollView.scrollIndicatorInsets = insets
         }
+        
+        scrollView.contentInset = insets
     }
     
     // MARK: - Actions
