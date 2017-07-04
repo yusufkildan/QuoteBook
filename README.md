@@ -12,7 +12,7 @@ $pod install
 * Sharing quotes on Facebook and Twitter
 
 ## Screen Shoot
-![alt tag](http://g.recordit.co/wNe6QRTKxT.gif)
+![alt tag](http://g.recordit.co/TwDMAZG2be.gif)
 
 ## License
 MIT License
