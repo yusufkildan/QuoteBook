@@ -63,12 +63,6 @@ class QuotesTableViewController: BaseTableViewController {
                            forCellReuseIdentifier: QuotesTableViewCellReuseIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        var insets = contentInset
-        insets?.bottom = defaultBottomInset()
-        
-        contentInset = insets
-        scrollIndicatorInsets = insets
-        
         loadData(withRefresh: true)
     }
     

@@ -60,7 +60,6 @@ class AuthorsTableViewController: BaseTableViewController {
         
         var insets = tableView.contentInset
         insets.top = defaultTopInset()
-        insets.bottom = defaultBottomInset()
         
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
